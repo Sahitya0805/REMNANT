@@ -1,6 +1,7 @@
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { IntegrationOverview } from './IntegrationOverview';
+import { SwiggyBuildersClubModal } from './SwiggyBuildersClubModal';
 
 interface ManifestoViewProps {
   onEnterArchive: () => void;
@@ -13,15 +14,25 @@ export const ManifestoView: React.FC<ManifestoViewProps> = ({
   searchQuery,
   onSearchChange
 }) => {
+  const [isBuildersModalOpen, setIsBuildersModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col justify-between max-w-5xl mx-auto px-6 lg:px-12 py-16 space-y-36 relative z-10 font-sans">
       
       {/* Unbroken Hero Section */}
       <div className="space-y-10 text-center max-w-3xl mx-auto pt-8">
         
+        {/* Official Swiggy Builders Club Banner */}
+        <button
+          onClick={() => setIsBuildersModalOpen(true)}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--accent-color)]/30 bg-[var(--accent-color)]/10 text-xs font-mono-meta text-[var(--accent-color)] font-bold hover:border-[var(--accent-color)] transition-all cursor-pointer shadow-sm"
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>SWIGGY BUILDERS CLUB 2026 OFFICIAL SUBMISSION</span>
+        </button>
+
         {/* Emblem & Unbroken Title */}
-        <div className="space-y-4">
-          <div className="w-3 h-3 rounded-full bg-[var(--accent-color)] animate-ping mx-auto shadow-[0_0_20px_rgba(255,122,26,0.8)]" />
+        <div className="space-y-4 pt-2">
           <h1 className="text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight font-logo uppercase text-[var(--text-primary)] leading-none">
             REMNANT
           </h1>
@@ -47,7 +58,7 @@ export const ManifestoView: React.FC<ManifestoViewProps> = ({
         </div>
 
         {/* Confident Short CTA */}
-        <div className="pt-4">
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={onEnterArchive}
             className="inline-flex items-center gap-3 font-medium text-base text-white transition-all duration-300 hover:-translate-y-0.5"
@@ -59,6 +70,13 @@ export const ManifestoView: React.FC<ManifestoViewProps> = ({
           >
             <span>Remember</span>
             <ArrowRight className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={() => setIsBuildersModalOpen(true)}
+            className="px-6 py-4 rounded-2xl border border-[var(--border-color)] hover:border-[var(--accent-color)] text-xs font-mono-meta text-[var(--text-primary)] transition-all bg-[var(--bg-surface)]"
+          >
+            Swiggy MCP Pitch Deck
           </button>
         </div>
 
@@ -91,6 +109,13 @@ export const ManifestoView: React.FC<ManifestoViewProps> = ({
 
       {/* Integration Overview Section */}
       <IntegrationOverview />
+
+      {/* Pitch Deck Modal */}
+      <SwiggyBuildersClubModal
+        isOpen={isBuildersModalOpen}
+        onClose={() => setIsBuildersModalOpen(false)}
+        onOpenSync={() => {}}
+      />
 
     </div>
   );
