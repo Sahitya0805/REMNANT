@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export const TimelineCard: React.FC = () => {
   const steps = [
@@ -30,8 +31,13 @@ export const TimelineCard: React.FC = () => {
   ];
 
   return (
-    <div className="p-8 rounded-[32px] bg-[var(--bg-card)] border border-[var(--border-color)] space-y-6 flex flex-col justify-between transition-all duration-300">
-      
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className="p-8 rounded-[32px] bg-[var(--bg-card)] border border-[var(--border-color)] hover:border-[var(--accent-color)]/50 space-y-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl"
+    >
       <div className="space-y-2 border-b border-[var(--border-color)] pb-4">
         <h3 className="text-2xl font-extrabold text-[var(--text-primary)] tracking-tight">
           Platform & Security
@@ -43,8 +49,14 @@ export const TimelineCard: React.FC = () => {
 
       <div className="space-y-6 relative before:absolute before:left-5 before:top-4 before:bottom-4 before:w-[1px] before:bg-[var(--border-color)]">
         {steps.map((step, idx) => (
-          <div key={idx} className="relative flex items-start gap-4 group">
-            
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, x: -15 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            className="relative flex items-start gap-4 group"
+          >
             {/* Step Number Circle */}
             <div className="w-10 h-10 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] group-hover:border-[var(--accent-color)] group-hover:bg-[var(--accent-color)] text-[var(--accent-color)] group-hover:text-white flex items-center justify-center font-mono-meta font-extrabold text-sm transition-all duration-300 z-10 shadow-sm flex-shrink-0">
               {step.num}
@@ -58,15 +70,14 @@ export const TimelineCard: React.FC = () => {
                 {step.desc}
               </p>
             </div>
-
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      <div className="pt-2 text-xs font-mono-meta text-[var(--text-secondary)]">
-        🔒 End-to-End Privacy Guaranteed
+      <div className="pt-2 text-xs font-mono-meta text-[var(--text-secondary)] flex items-center gap-2">
+        <span>🔒 End-to-End Privacy Guaranteed</span>
       </div>
 
-    </div>
+    </motion.div>
   );
 };
