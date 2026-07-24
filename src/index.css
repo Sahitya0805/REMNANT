@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* 🌙 Dark Mode — Noir Edition (Default) */
+    --bg-primary: #090909;
+    --bg-surface: #111111;
+    --bg-card: #171717;
+    --border-color: #2A2A2A;
+    --text-primary: #F5F2ED;
+    --text-secondary: #A7A29A;
+    --accent-color: #FF7A1A;
+    --accent-hover: #FF9B4D;
+  }
+
+  body.theme-parchment {
+    /* 🌞 Light Mode — Parchment Edition */
+    --bg-primary: #F5EFE6;
+    --bg-surface: #FFFDF8;
+    --bg-card: #F9F4EC;
+    --border-color: #D8CFC2;
+    --text-primary: #1B1B1B;
+    --text-secondary: #6B6258;
+    --accent-color: #C86B1F;
+    --accent-hover: #B95C14;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Geist', system-ui, sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  /* Subtle Archival Grain Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+}
+
+.font-logo {
+  font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.font-mono-meta {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.editorial-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-color);
+}
+
+.underline-search {
+  border-bottom: 2px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.underline-search:focus-within {
+  border-color: var(--accent-color);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
